@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from "./components/header/Header";
 import HomePage from "./pages/homepage/HomePage";
@@ -44,7 +44,7 @@ componentDidMount() {
           <Header />
           <Route exact path="/" component={HomePage}/>
           <Route path="/shop" component={ShopPage}/>
-          <Route path="/signin" component={SigninPage}/>
+          <Route path="/signin" render={()=>this.props.currentUser ? (<Redirect to="/" />) : (<SigninPage />)}/>
         </Router>
   
       </div>
@@ -57,5 +57,6 @@ componentDidMount() {
 
 }
 
+const mapStateToProps = state=>({currentUser: state.user.currentUser})
 const mapDispatchToProps = (dispatch, getState)=>({setCurrentUser: (user)=>dispatch(setCurrentUser(user))})
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
