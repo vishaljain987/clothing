@@ -9,9 +9,10 @@ import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shoppage/ShopPage";
 import SigninPage from "./pages/signinpage/SigninPage";
 import CheckOut from "./pages/checkout/CheckOut";
-import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
+import {auth, createUserProfileDocument, addCollectionAndDocuments} from "./firebase/firebase.utils";
 import {setCurrentUser} from "./actions/userAction";
 import {selectUserCurrent} from "./utils/user.selector";
+//import {SHOP_DATA} from "./pages/shoppage/shop.data";
 
 class App extends React.Component {
   /*
@@ -39,6 +40,9 @@ componentDidMount() {
       this.props.setCurrentUser(userAuth);
     }
   });
+
+  //one time dataload
+  //addCollectionAndDocuments('collections', SHOP_DATA.map(({title, items})=>({title, items})));
 }
 
   render(){

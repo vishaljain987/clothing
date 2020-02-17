@@ -6,29 +6,30 @@ import CartIcon from "../carticon/CartIcon";
 import CartDropdown from "../cartdropdown/CartDropdown"
 import "./Header.scss";
 import {ReactComponent as Logo} from "../../assets/crown.svg";
+import {HeaderContainer, LogoContainer, OptionsContainer, OptionLink} from "./Header.styles";
 
 function Header(props) {
-  const authLink = props.currentUser ? (<div className="option" onClick={()=>auth.signOut()}>
+  const authLink = props.currentUser ? (<OptionLink as div onClick={()=>auth.signOut()}>
                                           SIGN OUT
-                                        </div>) 
+                                        </OptionLink>) 
                                      : (<Link className="option" to="/signin">SIGN IN</Link>)
     return (
-        <div className='header'>
-        <Link className='logo-container' to='/'>
+        <HeaderContainer>
+        <LogoContainer to='/'>
           <Logo className='logo' />
-        </Link>
-        <div className='options'>
-          <Link className='option' to='/shop'>
+        </LogoContainer>
+        <OptionsContainer>
+          <OptionLink to='/shop'>
             SHOP
-          </Link>
-          <Link className='option' to='/shop'>
+          </OptionLink>
+          <OptionLink to='/shop'>
             CONTACT
-          </Link>
+          </OptionLink>
           { authLink }
           <CartIcon />
-        </div>
+        </OptionsContainer>
         {props.hidden ? null : <CartDropdown />}
-      </div>
+      </HeaderContainer>
     )
 }
 const mapStateToProps = (state)=>({currentUser: state.user.currentUser,

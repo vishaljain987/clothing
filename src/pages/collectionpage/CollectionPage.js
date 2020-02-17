@@ -5,7 +5,7 @@ import CollectionItem from "../../components/collectionitem/CollectionItem";
 import {selectShopCollection} from "../../utils/shop.selector";
 import "./CollectionPage.scss";
 
-function Collection({collection, match}) {
+function CollectionPage({collection, match}) {
     
     const collectionItems = collection.items.map(item=><CollectionItem key={item.id} item={item}/>)
     const { title } = collection;
@@ -20,9 +20,9 @@ function Collection({collection, match}) {
 }
 
 const mapStateToProps = (state, ownProps)=>{
-    
+   
     return{
         collection: selectShopCollection(ownProps.match.params.category)(state)
     }
 }
-export default connect(mapStateToProps)(Collection);
+export default connect(mapStateToProps)(CollectionPage);
